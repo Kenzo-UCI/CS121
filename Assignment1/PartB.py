@@ -3,6 +3,33 @@ import PartA
 
 class Relator:
 
+    #In the file1 
+    #Let 'l1' be the number of lines 
+    #Let 'c1' be the number of character on a line
+    #Let 'n1' be the number of tokens 
+
+    #In the file2
+    #Let 'l2' be the number of lines 
+    #Let 'c2' be the number of character on a line
+    #Let 'n2' be the number of tokens 
+
+    #Calling tokenize of file1 takes O(l1 c1 + n1) time.
+    #Calling tokenize of file1 takes O(l2 c2 + n2) time.
+
+    #Calling computeWordFreq on file1 take O(n1) time.
+    #Calling computeWordFreq on file2 take O(n2) time. 
+
+    #Then we convert each word to lower case whch is O(n) time.
+    #This results in a final time complexity of O(lc+n).
+
+    #For every token in file while we loop through every token in file 2
+    #This gives us O(n1 n2) time complexity.
+
+    #Therefore we get total time complexity of O(l1 c1 + n1) + O(l2 c2 + n2) + O(n1 n2)
+    #If we take l, c, n to be the upper limits
+    # then we get time complexity of O(l + c + n) + O(n^2)
+    #The number of tokens will probably dominate giving us O(n^2) time complexity
+
     def findCommonWords(self, fileName1, fileName2):
 
         mapper = PartA.FreqMapper()
@@ -12,9 +39,6 @@ class Relator:
 
         map1=mapper.computeWordFreq(tokens1)
         map2=mapper.computeWordFreq(tokens2)
-
-        print("list 1= ", tokens1)
-        print("list 2= ", tokens2)
 
         counter=0;
 
