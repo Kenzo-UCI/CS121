@@ -19,22 +19,30 @@ class FreqMapper:
         """
         try:
             
-            tokens=[];
-            
+            tokens=[]
+            tempWord=""
             #opening the file for reading 
-            with open(file_path, 'r') as file:
-                for line in file:
+            file = open(file_path, "rb")
+            byte = file.read(1)
+            while byte:
+                if byte == b'\n':
+                    byte = file.read(1)
+                    continue
+                char = str(byte, 'utf-8')
+                if char.isalnum():
+                    #convert each word to lower case so same words with different Casing
+                    char = char.lower()
+                    tempWord+=char;
+                elif tempWord != "":
+                    tokens.append(tempWord)
+                    tempWord=""
+                byte = file.read(1)
 
-                    #extending the tokens list with the list of words from current line
-                    tokens.extend(line.split())
+            file. close()
 
-
-            #convert each word to lower case so same words with different Casing
-            #are counted as one
-            for i in range (0, len(tokens)):
-                tokens[i]=tokens[i].lower()
-                
-
+            if(tempWord != ""):
+                tokens.append(tempWord);
+            
             return tokens
         
         except FileNotFoundError:
@@ -82,7 +90,15 @@ class FreqMapper:
         sorted_counts = sorted(freqMap.items(), key=lambda item: (-item[1], item[0]))
 
         for word, count in sorted_counts:
-            print(f"{word}->{count}")
+            print(f"|{word}|->{count}")
+
+    def debugger(self, file_path):
+        file = open(file_path, "rb")
+        byte = file. read(1)
+        while byte: #byte=false at end of file.
+            print(byte)
+            byte = file. read(1)
+        file. close()
 
 if __name__ == "__main__":
 
@@ -98,4 +114,7 @@ if __name__ == "__main__":
     mapper = FreqMapper()
 
     # Call the tokenize function
-    map.printMap(map.computeWordFreq(map.tokenize(arg1)))
+    mapper.printMap(mapper.computeWordFreq(mapper.tokenize(arg1)))
+    # mapper.computeWordFreq(mapper.tokenize(arg1))
+    # mapper.debugger(arg1)
+    
