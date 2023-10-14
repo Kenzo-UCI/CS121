@@ -2,14 +2,10 @@ import sys
 
 class FreqMapper:
 
-
-    #Let 'l' be the number of lines in the file 
-    #Let 'c' be the number of character on a line 
-    #Let 'n' be the number of tokens 
-    #In the worst case we have to go through every character on each line which is
-    #O(lc) time. 
-    #Then we convert each word to lower case whch is O(n) time.
-    #This results in a final time complexity of O(lc+n).
+ 
+    #Let 'n' be the number of bytes in the file 
+    #The while loop goes through each character in the file
+    #This results in a time complexity O(n).
 
     def tokenize(self, file_path):
         """
@@ -25,7 +21,11 @@ class FreqMapper:
             file = open(file_path, "rb")
             byte = file.read(1)
             while byte:
+                #if we have reached the end of line and there is something left in the tempWord buffer append it
                 if byte == b'\n':
+                    if tempWord != "":
+                        tokens.append(tempWord)
+                        tempWord=""
                     byte = file.read(1)
                     continue
                 char = str(byte, 'utf-8')
@@ -92,14 +92,8 @@ class FreqMapper:
         for word, count in sorted_counts:
             print(f"|{word}|->{count}")
 
-    def debugger(self, file_path):
-        file = open(file_path, "rb")
-        byte = file. read(1)
-        while byte: #byte=false at end of file.
-            print(byte)
-            byte = file. read(1)
-        file. close()
-
+# The main method calls three functions each of which have O(n) time complexity
+# O(3n) = O(n) runtime complexity
 if __name__ == "__main__":
 
     #Check for correct number of arguments, always one extra
@@ -115,6 +109,4 @@ if __name__ == "__main__":
 
     # Call the tokenize function
     mapper.printMap(mapper.computeWordFreq(mapper.tokenize(arg1)))
-    # mapper.computeWordFreq(mapper.tokenize(arg1))
-    # mapper.debugger(arg1)
     
