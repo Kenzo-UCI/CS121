@@ -3,12 +3,11 @@ import PartA
 
 class Relator:
 
-    #tokenize(file_name) has runtime O(n) -> called twice -> O(n1) + O(n2)
-    #converting these lists to sets -> O(n1) + O(n2)
+    #tokenize(file_name) has runtime O(n). SInce it's called twice: O(n1) + O(n2)
+    #converting these lists to sets takes O(n1) + O(n2)
     #the intersection operation take O(min(n1, n2))
-    #In total O(2n1) + O(2n2) + O(min(n1,n2))
-    #This can be simplified to O(n1 + n2) time complexity
-
+    #in total O(2n1) + O(2n2) + O(min(n1,n2))
+    #this can be simplified to O(n1 + n2) time complexity
 
     def findCommonWords(self, fileName1, fileName2):
 
@@ -24,7 +23,7 @@ class Relator:
 
 #n1-> number of tokens in file 1
 #n2-> number of tokens in file 2
-#main method has a time complexity of O(n1 * n2)
+#main method has a time complexity of O(n1 + n2)
 if __name__ == "__main__":
 
     #Check for correct number of arguments, always one extra
