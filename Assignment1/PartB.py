@@ -30,8 +30,9 @@ class Relator:
 
         print(counter)
 
-
-
+#n1-> number of tokens in file 1
+#n2-> number of tokens in file 2
+#main method has a time complexity of O(n1 * n2)
 if __name__ == "__main__":
 
     #Check for correct number of arguments, always one extra
