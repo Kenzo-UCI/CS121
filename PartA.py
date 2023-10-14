@@ -28,7 +28,11 @@ class FreqMapper:
                         tempWord=""
                     byte = file.read(1)
                     continue
-                char = str(byte, 'utf-8')
+                try:
+                    char = str(byte, 'utf-8')
+                except UnicodeDecodeError as e:
+                    byte = file.read(1)
+                    continue
                 if char.isalnum():
                     #convert each word to lower case so same words with different Casing
                     char = char.lower()

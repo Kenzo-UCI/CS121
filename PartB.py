@@ -4,11 +4,10 @@ import PartA
 class Relator:
 
     #tokenize(file_name) has runtime O(n) -> called twice -> O(n1) + O(n2)
-    #computeWordFreq(tokens) has a runtime of O(n)-> called twice -> O(n1) + O(n2)
-    #We then compare every token from file1 with every token in file2 
-    #nested for loop -> O(n1 * n2)
-    #This results in O(n1 * n2 + O(n1) + 2(On2))
-    #Simplified Time Complexity: O(n1 * n2)
+    #converting these lists to sets -> O(n1) + O(n2)
+    #the intersection operation take O(min(n1, n2))
+    #In total O(2n1) + O(2n2) + O(min(n1,n2))
+    #This can be simplified to O(n1 + n2) time complexity
 
 
     def findCommonWords(self, fileName1, fileName2):
@@ -18,17 +17,10 @@ class Relator:
         tokens1=mapper.tokenize(fileName1)
         tokens2= mapper.tokenize(fileName2)
 
-        map1=mapper.computeWordFreq(tokens1)
-        map2=mapper.computeWordFreq(tokens2)
+        A = set(tokens1)
+        B = set(tokens2)
 
-        counter=0;
-
-        for token1 in map1.keys():
-            for token2 in map2.keys():
-                if token1 == token2:
-                    counter+=1
-
-        print(counter)
+        print(len(A.intersection(B)))
 
 #n1-> number of tokens in file 1
 #n2-> number of tokens in file 2
